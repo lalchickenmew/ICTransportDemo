@@ -23,12 +23,18 @@ namespace ICTransportDemo.Controllers
         [HttpPost]
         public async Task<IActionResult> ActionName(string companyname)
         {
-            BusinessLogic service = new BusinessLogic();
+            
             try
             {
+                BusinessLogic service = new BusinessLogic();
                 //CUSTOMER_DETAIL cus_detail = service.CustomerCompamy(companyname);
                 List<CUSTOMER_DETAIL> cus_detail = await service.CustomerCompamy(companyname);
+                if (cus_detail.Count() > 1)
+                {
+                    ViewBag.ShowModal = true;
+                }
                 ViewBag.CompanyName = cus_detail;
+
             }
             catch (Exception ex)
             {
@@ -36,6 +42,15 @@ namespace ICTransportDemo.Controllers
             }
             return View("Index");
         }
+        public async Task<IActionResult> ChooseFunction(long id , string name)
+        {
+            BusinessLogic service = new BusinessLogic();
+            List<CUSTOMER_DETAIL> cus_detail = await service.CustomerCompamy(name);
+            var vehicle = cus_detail.Where(x => x.customer_id == id);
+           
+            return View("Index");
+        }
+
         public IActionResult MyPartialAction(string id , string name)
         {
             // Perform any necessary logic

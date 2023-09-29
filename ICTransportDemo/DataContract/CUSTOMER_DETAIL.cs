@@ -1,5 +1,7 @@
 ﻿namespace ICTransportDemo.DataContract
 {
+
+
     public class CUSTOMER_DETAIL
     {
         public long customer_id { get; set; }
@@ -19,4 +21,6 @@
         public long customerid { get; set; }
         public string license_no { get; set; }
     }
+
+   
 }

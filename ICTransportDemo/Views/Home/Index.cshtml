@@ -1,8 +1,11 @@
-﻿@{
+﻿@using ICTransportDemo.DataContract;
+@{
     ViewData["Title"] = "Home Page";
+    List<CUSTOMER_DETAIL> detail;
 }
 @{
     bool showModal = ViewBag.ShowModal != null && (bool)ViewBag.ShowModal;
+
 }
 <header>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
@@ -21,6 +24,7 @@
                 <div class="modal-body w-100" >
                     @if (ViewBag.CompanyName != null)
                     {
+                        detail = ViewBag.CompanyName;
                         <table class="table table-striped table-hover " id="myTable">
                             <thead>
                                 <tr>
@@ -35,9 +39,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in ViewBag.CompanyName)
+                                @foreach (var item in detail)
                                 {
-                                    <tr data-id="@item.customer_id" data-name="@item.cust_type">
+
+                                    <tr data-id="@item.customer_id" data-name="@item.vehicleCus.Select(x => x.license_no).FirstOrDefault()">
                                         <th scope="row">3</th>
                                         <td colspan="2">@item.address</td>
                                         <td>@item.district_name_tha</td>
@@ -45,6 +50,10 @@
                                         <td>@item.province_name_tha</td>
                                         <td>@item.zip_Code</td>
                                         <td>@item.phone_No</td>
+                                        @foreach (var lisen in item.vehicleCus)
+                                        {
+                                            
+                                        }
 
                                         <td><button class="select-button">Select</button></td>
                                     </tr>

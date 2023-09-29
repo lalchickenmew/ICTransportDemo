@@ -4,6 +4,7 @@ using NuGet.Common;
 using RestSharp;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
@@ -13,6 +14,9 @@ namespace ICTransportDemo.ServiceAction
 {
     public class BusinessLogic
     {
+        public string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdG1wYmVuekBnbWFpbC5jb20iLCJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ0siLCJleHAiOjE2OTU5OTM4MDIsImlzcyI6IklTRUUiLCJhdWQiOiJodHRwOi8vSVNFRS5jb20ifQ.Zx_gIZ4WSBcAhAaMUQpl7fulhL1cDWqA-P8LdZK0p10";
+        private object client;
+
         public async Task<List<CUSTOMER_DETAIL>> CustomerCompamy(string fname)
         {
             // RestClient client = new RestClient("http://203.151.136.81/iseecenterapi");
@@ -22,9 +26,7 @@ namespace ICTransportDemo.ServiceAction
 
 
             HttpClient httpClient = new HttpClient();
-            string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdG1wYmVuekBnbWFpbC5jb20iLCJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ0siLCJleHAiOjE2OTU5MTIxMDgsImlzcyI6IklTRUUiLCJhdWQiOiJodHRwOi8vSVNFRS5jb20ifQ.3mlIeeSZa1bnoculc4ft6L8e7BgSZymuhEurjsU2Jdc";
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            //HttpResponseMessage response = await httpClient.PostAsync($"http://203.151.136.81/iseecenterapi/api/v1/Menus/CounterCall/",parameter);
             HttpResponseMessage response = await httpClient.GetAsync($"http://203.151.136.81/iseecenterapi/api/v1/Menus/CounterCall/{fname}");
             List<CUSTOMER_DETAIL> detail = new List<CUSTOMER_DETAIL>();
 
@@ -42,12 +44,16 @@ namespace ICTransportDemo.ServiceAction
             return detail;
         }
 
-        public string GetDetail(string cus_id , string licen_no)
+        public  List<GET_ALL_DETAIL> GetDetail(string cus_id , string licen_no)
         {
             RestClient client = new RestClient("http://203.151.136.81/iseecenterapi");
             RestRequest request = new RestRequest($"api/v1/Menus/GetCounterDetail/{cus_id}/{licen_no}", Method.Get);
+            request.AddHeader("token", token);
             var response = client.Execute(request);
-            return response.Content;
+            List<GET_ALL_DETAIL> detail = new List<GET_ALL_DETAIL>();
+            detail = JsonConvert.DeserializeObject<List<GET_ALL_DETAIL>>(response.Content);
+            return detail;
+
         }
     }
 }
