@@ -14,44 +14,50 @@ namespace ICTransportDemo.ServiceAction
 {
     public class BusinessLogic
     {
-        public string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdG1wYmVuekBnbWFpbC5jb20iLCJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ0siLCJleHAiOjE2OTU5OTM4MDIsImlzcyI6IklTRUUiLCJhdWQiOiJodHRwOi8vSVNFRS5jb20ifQ.Zx_gIZ4WSBcAhAaMUQpl7fulhL1cDWqA-P8LdZK0p10";
+        public string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdG1wYmVuekBnbWFpbC5jb20iLCJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ0siLCJleHAiOjE2OTY0MjMwNzgsImlzcyI6IklTRUUiLCJhdWQiOiJodHRwOi8vSVNFRS5jb20ifQ.phY_45WvexCsD9fVW8C52jo9asS1a3M3y5ZtaUfL40o";
         private object client;
 
-        public async Task<List<CUSTOMER_DETAIL>> CustomerCompamy(string fname)
+        public List<CUSTOMER_DETAIL> CustomerCompamy(string fname)
         {
-            // RestClient client = new RestClient("http://203.151.136.81/iseecenterapi");
-            // RestRequest request = new RestRequest($"api/v1/Menus/CounterCall/{fname}", Method.Get);
-            //request.AddParameter("fname", "sssss");
-            //  RestResponse response = client.Execute(request);
+            RestClient client = new RestClient("http://203.151.136.81/iseecenterapi");
+            RestRequest request = new RestRequest($"api/v1/Menus/CounterCall/{fname}", Method.Get);
 
-
-            HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await httpClient.GetAsync($"http://203.151.136.81/iseecenterapi/api/v1/Menus/CounterCall/{fname}");
+            request.AddHeader("Authorization", "Bearer " + token);
+            var response = client.Execute(request);
             List<CUSTOMER_DETAIL> detail = new List<CUSTOMER_DETAIL>();
 
-            if (response.IsSuccessStatusCode)
+            if (response != null)
             {
-                string responseBody = await response?.Content?.ReadAsStringAsync();
-                detail = JsonConvert.DeserializeObject<List<CUSTOMER_DETAIL>>(responseBody);
+                if (response.IsSuccessful)
+                {
+                    detail = JsonConvert.DeserializeObject<List<CUSTOMER_DETAIL>>(response.Content);
+                }
             }
             else
             {
-                detail = new List<CUSTOMER_DETAIL>();
                 Console.WriteLine($"HTTP request failed with status code: {response.StatusCode}");
             }
-
             return detail;
         }
 
-        public  List<GET_ALL_DETAIL> GetDetail(string cus_id , string licen_no)
+        public  GET_ALL_DETAIL GetDetail(string cus_id , string licen_no)
         {
             RestClient client = new RestClient("http://203.151.136.81/iseecenterapi");
             RestRequest request = new RestRequest($"api/v1/Menus/GetCounterDetail/{cus_id}/{licen_no}", Method.Get);
-            request.AddHeader("token", token);
+            request.AddHeader("Authorization", "Bearer " +token);
             var response = client.Execute(request);
-            List<GET_ALL_DETAIL> detail = new List<GET_ALL_DETAIL>();
-            detail = JsonConvert.DeserializeObject<List<GET_ALL_DETAIL>>(response.Content);
+            GET_ALL_DETAIL detail = new GET_ALL_DETAIL();
+            if (response != null)
+            {
+                if (response.IsSuccessful)
+                {
+                    detail = JsonConvert.DeserializeObject<GET_ALL_DETAIL>(response.Content);
+                }
+            }
+            else
+            {               
+                Console.WriteLine($"HTTP request failed with status code: {response.StatusCode}");
+            }
             return detail;
 
         }

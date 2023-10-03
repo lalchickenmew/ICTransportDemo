@@ -1,0 +1,42 @@
+﻿@using ICTransportDemo.DataContract;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+   
+}
+@model List<CUSTOMER_DETAIL>
+<table class="table table-striped table-hover " id="myTable">
+    <thead>
+        <tr>
+            <th scope="col">ชื่อ</th>
+            <th scope="col">ที่อยู่</th>
+            <th scope="col">ตำบล</th>
+            <th scope="col">อำเภอ</th>
+            <th scope="col">จังหวัด</th>
+            <th scope="col">ไปรษณี</th>
+            <th scope="col">รหัสลูกค้า</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr id="checkelement" onclick="SelectLisen('@item.customer_id' , '@item.vehicleCus.FirstOrDefault().license_no')">
+
+                <td >@item.fname</td>
+                <td >@item.address</td>
+                <td>@item.district_name_tha</td>
+                <td>@item.sub_district_name_tha</td>
+                <td>@item.province_name_tha</td>
+                <td>@item.zip_Code</td>
+                <td>@item.phone_No</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    
+</script>

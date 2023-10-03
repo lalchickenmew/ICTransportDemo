@@ -2,179 +2,189 @@
 @{
     ViewData["Title"] = "Home Page";
     List<CUSTOMER_DETAIL> detail;
+    CUSTOMER_DETAIL cus_detail = new CUSTOMER_DETAIL();
+    VEHICLE_DETAIL vehicle_show = new VEHICLE_DETAIL();
+    JOBHEADER job_show = new JOBHEADER();
 }
 @{
     bool showModal = ViewBag.ShowModal != null && (bool)ViewBag.ShowModal;
-
+    if (ViewBag.cutomerdetail != null)
+    {
+        cus_detail = ViewBag.cutomerdetail;
+    }
+    if (ViewBag.job_data != null)
+    {
+        job_show = ViewBag.job_data;
+    }
+    if (ViewBag.vehicle_data != null)
+    {
+        vehicle_show = ViewBag.vehicle_data;
+    }
 }
+@model List<CUSTOMER_DETAIL>
 <header>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </header>
-@if (showModal)
-{
-    <!-- Modal HTML -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">กรุณาเลือกรายการที่ต้องการ</h5>
-                </div>
-                <div class="modal-body w-100" >
-                    @if (ViewBag.CompanyName != null)
-                    {
-                        detail = ViewBag.CompanyName;
-                        <table class="table table-striped table-hover " id="myTable">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in detail)
-                                {
 
-                                    <tr data-id="@item.customer_id" data-name="@item.vehicleCus.Select(x => x.license_no).FirstOrDefault()">
-                                        <th scope="row">3</th>
-                                        <td colspan="2">@item.address</td>
-                                        <td>@item.district_name_tha</td>
-                                        <td>@item.sub_district_name_tha</td>
-                                        <td>@item.province_name_tha</td>
-                                        <td>@item.zip_Code</td>
-                                        <td>@item.phone_No</td>
-                                        @foreach (var lisen in item.vehicleCus)
-                                        {
-                                            
-                                        }
+<!-- Modal HTML -->
 
-                                        <td><button class="select-button">Select</button></td>
-                                    </tr>
-                                    @* <div class="row">
-                                        <a href="/Home/MyPartialAction?cusid=@item.customer_id&licenno=@item.cust_type">@item.district_name_tha</a>
-                                    </div> *@
 
-                                }
-                            </tbody>
-                        </table>
-                        
-                    }
-                </div>                
-            </div>
-        </div>
-    </div>
+<!-- JavaScript to show the modal -->
 
-    <!-- JavaScript to show the modal -->
-    <script>
-        $(document).ready(function () {
-            $('#myModal').modal('show');
-        });
-        
-        $(document).ready(function () {
-           
-            // Handle row selection
-            $("#myTable").on("click", ".select-button", function () {
-                var row = $(this).closest("tr");
-                var id = row.data("id");
-                var name = row.data("name");
 
-                // Send the selected data to the controller action using AJAX
-                $.ajax({
-                    url: '@Url.Action("MyPartialAction", "Home")',
-                    type: 'POST',
-                    data: { id: id, name: name },
-                    success: function (result) {
-                        // Handle the response from the controller if needed
-                        $('#myModal').modal('hide');
-                    },
-                    error: function (error) {
-                        // Handle errors if any
-                    }
-                });
-            });
-        });
-    </script>
-}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3 vh-100" style="background-color:#86C8FF">
+
+<div class="container-fluid">
+    <div class="row shadow">
+        <div class="col-sm-2 vh-100 rounded-1 " style="background-color:#86C8FF">
             <div class="nav flex-column 100vh nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="background-color:#86C8FF">
-                <div class="" data-bs-toggle="pill">รายการทะเบียน</div>
-                @if(ViewBag.CompanyName != null){
-                    @foreach (var item in ViewBag.CompanyName)
-                    {
-                       <a href="/Home/MyPartialAction?cusid=@item.customer_id&licenno=@item.cust_type">@item.customer_id</a>
-                    }
-                }
-            </div>
-        </div>
-        <div class="col-sm-9 ">
-            <div class="row" style="height:50px; background-color:#B8DEFD">
+                @*  <div class="" data-bs-toggle="pill">รายการทะเบียน</div> *@
 
-                <div class="col-2 align-text-bottom">
-                    ชื่อบริษัท
-                </div>
-                <div class="col-4">
-                    <form asp-action="ActionName" asp-controller="Home" method="post">
-                        <input type="text" name="companyname" />
-                        @* <input type="submit" value="Submit" /> *@
-                        <button class="btn btn-outline-secondary" type="submit"@*  onclick="loadPartialView()" *@ id="button-addon2">ค้นหา</button>
-                    </form>
-                </div>
+                <div class="accordion accordion-flush mt-1 " id="accordionFlushExample">
+                    <div class="accordion-item rounded-2 shadow">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button id="trigcollap" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                รายการทะเบียน
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
 
-            </div>
-            <div class="row">
-                <div class="container mt-2 mb-2">
-                    <div class="row">
-                        <div class="col-2 justify-content-end">ข้อมูลลูกค้า</div>
-                        <div class="col-4">@ViewBag.Name</div>
-                        <div class="col-2 justify-content-end">ข้อมูลลูกค้า</div>
-                        <div class="col-4">@ViewBag.Licen </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2 justify-content-end">ข้อมูลลูกค้า</div>
-                        <div class="col-4">@ViewBag.Name</div>
-                        <div class="col-2 justify-content-end">ข้อมูลลูกค้า</div>
-                        <div class="col-4">@ViewBag.Licen </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div>
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-desc-tab" data-bs-toggle="tab" data-bs-target="#nav-desc" type="button" role="tab" aria-controls="nav-home" aria-selected="true">รายละเอียดรถ</button>
-                                <button class="nav-link" id="nav-descjob-tab" data-bs-toggle="tab" data-bs-target="#nav-descjob" type="button" role="tab" aria-controls="nav-descjob" aria-selected="false">รายละเอียดงาน</button>
-                                <button class="nav-link" id="nav-mailhis-tab" data-bs-toggle="tab" data-bs-target="#nav-mailhis" type="button" role="tab" aria-controls="nav-mailhis" aria-selected="false">ประวัติการส่งอีเมล</button>
+                            <div class="accordion-body">
+                                @if (Model != null)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        @foreach (var vitem in item.vehicleCus)
+                                        {
+                                            <div>
+                                                <a href="/Home/MyPartialAction?cusid=@item.customer_id&licenno=@item.cust_type">@vitem.license_no</a>
+                                            </div>
+                                        }
+                                        
+                                    }
+                                }
                             </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-desc" role="tabpanel" aria-labelledby="nav-desc-tab">
-                                รายละเอียดรถ
-
-
-                            </div>
-                            <div class="tab-pane fade" id="nav-descjob" role="tabpanel" aria-labelledby="nav-descjob-tab">รายละเอียดงาน</div>
-                            <div class="tab-pane fade" id="nav-mailhis" role="tabpanel" aria-labelledby="nav-mailhis-tab">ประวัติการส่งอีเมล</div>
                         </div>
                     </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-10 rounded-1" style="background-color : white">
+            <div class="row align-content-center rounded-1" style="height:50px; background-color:#B8DEFD">
+
+                <div class="col-6 ">
+                    <label class=" d-flex justify-content-end "></label>
+                </div>
+                <div class="col-6">
+
+                    <div class="row container">
+
+                        <div class="col d-flex justify-content-end">
+                            <div class="form-floating"></div>
+                            <input class="form-control w-50" id="company" type="text" name="companyname" placeholder="ชื่อบริษัท" />
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-outline-secondary" onclick="search(company)" id="button-addon2">ค้นหา</button>
+                        </div>
+
+
+                    </div>
+
 
                 </div>
 
+            </div>
+            <div id="getbyid">
+
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">กรุณาเลือกรายการที่ต้องการ</h5>
+            </div>
+            <div id="mdtail" class="modal-body w-100">
+
+
+               
 
             </div>
         </div>
     </div>
 </div>
-<script>
-  
-</script>
+
+<style>
+    tbody tr {
+        cursor: pointer;
+    }
+
+    label {
+        font-family: Serif;
+    }
+</style>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // $('#myModal').modal('show');
+        });
+
+        function trigger() {
+            $("#trigcollap").attr('aria-expanded', 'true');
+            $("#trigcollap").removeClass('collapsed');
+            $("#flush-collapseOne").removeClass('collapse');
+            $("#flush-collapseOne").addClass('collapsing');
+            $("#flush-collapseOne").removeClass('collapsing');
+            $("#flush-collapseOne").addClass('show');
+        }
+
+        function search() {
+            let com = $('#company').val();
+            console.log(com);
+            var mod = {
+                companyname: com
+            }
+            $.get('@Url.Action("Search","Home")', mod, function (res) {
+                
+                console.log('.checkelement'.length);
+                if (res != undefined) {
+
+                    $('#mdtail').append(res);
+                    $('#myModal').modal('show');
+ 
+                } else {
+                    console.log("fail");
+                }
+            }).done(function (res) {
+
+            });
+
+        }
+
+        function SelectLisen(customer_id, lisenno) {
+            var mod = {
+                cus_id: customer_id,
+                lisen: lisenno
+            }
+            $.get('@Url.Action("SelectLisen","Home")', mod, function (res) {
+                $('#myModal').modal('hide');
+                if (res != undefined) {
+                    $('#getbyid').html(res);
+                    $('#mdtail').html('');
+                    trigger();
+                    console.log("success");
+                } else {
+                    console.log("fail");
+                }
+            }).done(function (res) {
+
+            });
+        }
+    </script>
+}

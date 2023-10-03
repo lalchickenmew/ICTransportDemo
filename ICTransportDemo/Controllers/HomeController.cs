@@ -18,49 +18,55 @@ namespace ICTransportDemo.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> ActionName(string companyname)
+       /* public IActionResult Index(string companyname )
         {
-            
+            var cus_detail =  ActionName(companyname);
+            ViewBag.CompanyName = cus_detail;
+            return View();
+        }*/
+
+        public IActionResult Search(string companyname)
+        {
+            BusinessLogic service = new BusinessLogic();
+            List<CUSTOMER_DETAIL> cus_detail = service.CustomerCompamy(companyname);
             try
             {
-                BusinessLogic service = new BusinessLogic();
-                //CUSTOMER_DETAIL cus_detail = service.CustomerCompamy(companyname);
-                List<CUSTOMER_DETAIL> cus_detail = await service.CustomerCompamy(companyname);
                 if (cus_detail.Count() > 1)
                 {
-                    ViewBag.ShowModal = true;
+                    return PartialView("_Search", cus_detail);
                 }
-                ViewBag.CompanyName = cus_detail;
-
+                else
+                {
+                    return PartialView("Index", cus_detail);
+                }
             }
             catch (Exception ex)
             {
-                
+                throw new Exception();
             }
-            return View("Index");
+            
         }
-        public async Task<IActionResult> ChooseFunction(long id , string name)
+        public IActionResult ChooseFunction(long id , string name)
         {
             BusinessLogic service = new BusinessLogic();
-            List<CUSTOMER_DETAIL> cus_detail = await service.CustomerCompamy(name);
+            List<CUSTOMER_DETAIL> cus_detail =  service.CustomerCompamy(name);
             var vehicle = cus_detail.Where(x => x.customer_id == id);
            
             return View("Index");
         }
 
-        public IActionResult MyPartialAction(string id , string name)
+        public IActionResult SelectLisen(string cus_id , string lisen)
         {
-            // Perform any necessary logic
-            // Return the partial view
+            VEHICLE_DETAIL vehicle_data = new VEHICLE_DETAIL();
+            JOBHEADER job_data = new JOBHEADER();
+            CUSTOMER_DETAIL customer = new CUSTOMER_DETAIL();
             BusinessLogic service = new BusinessLogic();
-            var a = service.GetDetail(id, name);
-            ViewBag.Name = id;
-            ViewBag.Licen = name; 
-            ViewBag.ShowModal = false;
-            return View("Index");
+            GET_ALL_DETAIL data = service.GetDetail(cus_id, lisen);
+            
+            return PartialView("_GetBylisen", data);
         }
         public IActionResult Privacy()
         {
