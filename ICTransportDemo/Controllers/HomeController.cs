@@ -18,7 +18,11 @@ namespace ICTransportDemo.Controllers
 
         public IActionResult Index()
         {
-
+            if(ViewData["cus_detail"] != null)
+            {
+                ViewBag.cus_detail = ViewData["cus_detail"];
+            }
+            
             return View();
         }
        /* public IActionResult Index(string companyname )
@@ -40,7 +44,8 @@ namespace ICTransportDemo.Controllers
                 }
                 else
                 {
-                    return PartialView("Index", cus_detail);
+                    ViewData["cus_detail"] = cus_detail;
+                    return View("Index",null);
                 }
             }
             catch (Exception ex)

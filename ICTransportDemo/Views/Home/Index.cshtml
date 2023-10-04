@@ -1,4 +1,6 @@
 ﻿@using ICTransportDemo.DataContract;
+@using ICTransportDemo;
+
 @{
     ViewData["Title"] = "Home Page";
     List<CUSTOMER_DETAIL> detail;
@@ -8,18 +10,11 @@
 }
 @{
     bool showModal = ViewBag.ShowModal != null && (bool)ViewBag.ShowModal;
-    if (ViewBag.cutomerdetail != null)
+    if (ViewBag.cus_detail != null)
     {
-        cus_detail = ViewBag.cutomerdetail;
+        cus_detail = ViewBag.cus_detail;
     }
-    if (ViewBag.job_data != null)
-    {
-        job_show = ViewBag.job_data;
-    }
-    if (ViewBag.vehicle_data != null)
-    {
-        vehicle_show = ViewBag.vehicle_data;
-    }
+   
 }
 @model List<CUSTOMER_DETAIL>
 <header>
@@ -107,7 +102,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header shadow" style="background : lightblue">
                 <h5 class="modal-title" id="exampleModalLabel">กรุณาเลือกรายการที่ต้องการ</h5>
             </div>
             <div id="mdtail" class="modal-body w-100">
@@ -146,13 +141,12 @@
 
         function search() {
             let com = $('#company').val();
-            console.log(com);
             var mod = {
                 companyname: com
             }
             $.get('@Url.Action("Search","Home")', mod, function (res) {
-                
-                console.log('.checkelement'.length);
+                console.log(res);
+
                 if (res != undefined) {
 
                     $('#mdtail').append(res);

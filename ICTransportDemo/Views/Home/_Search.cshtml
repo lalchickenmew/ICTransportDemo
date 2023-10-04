@@ -23,7 +23,7 @@
         @foreach (var item in Model)
         {
 
-            <tr id="checkelement" onclick="SelectLisen('@item.customer_id' , '@item.vehicleCus.FirstOrDefault().license_no')">
+            <tr onclick="SelectLisen('@item.customer_id' , '@item.vehicleCus.FirstOrDefault().license_no')">
 
                 <td >@item.fname</td>
                 <td >@item.address</td>
@@ -37,6 +37,4 @@
         }
     </tbody>
 </table>
-<script>
-    
-</script>
+
