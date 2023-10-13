@@ -31,11 +31,9 @@
 
 
 <div class="container-fluid">
-    <div class="row shadow">
-        <div class="col-sm-2 vh-100 rounded-1 " style="background-color:#86C8FF">
-            <div class="nav flex-column 100vh nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="background-color:#86C8FF">
-                @*  <div class="" data-bs-toggle="pill">รายการทะเบียน</div> *@
-
+    <div class="row shadow mb-3">
+        <div class="col-sm-2 rounded-1 " style="background-color:#86C8FF">
+     
                 <div class="accordion accordion-flush mt-1 " id="accordionFlushExample">
                     <div class="accordion-item rounded-2 shadow">
                         <h2 class="accordion-header" id="flush-headingOne">
@@ -45,26 +43,15 @@
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
 
-                            <div class="accordion-body">
-                                @if (Model != null)
-                                {
-                                    @foreach (var item in Model)
-                                    {
-                                        @foreach (var vitem in item.vehicleCus)
-                                        {
-                                            <div>
-                                                <a href="/Home/MyPartialAction?cusid=@item.customer_id&licenno=@item.cust_type">@vitem.license_no</a>
-                                            </div>
-                                        }
-                                        
-                                    }
-                                }
+                            <div class="accordion-body" >
+                                <ul id="lisen-list">
+
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
         </div>
         <div class="col-sm-10 rounded-1" style="background-color : white">
             <div class="row align-content-center rounded-1" style="height:50px; background-color:#B8DEFD">
@@ -105,10 +92,7 @@
             <div class="modal-header shadow" style="background : lightblue">
                 <h5 class="modal-title" id="exampleModalLabel">กรุณาเลือกรายการที่ต้องการ</h5>
             </div>
-            <div id="mdtail" class="modal-body w-100">
-
-
-               
+            <div id="mdtail" class="modal-body w-100 h-50 ScrollBar">
 
             </div>
         </div>
@@ -116,6 +100,7 @@
 </div>
 
 <style>
+
     tbody tr {
         cursor: pointer;
     }
@@ -145,13 +130,28 @@
                 companyname: com
             }
             $.get('@Url.Action("Search","Home")', mod, function (res) {
-                console.log(res);
+                //console.log(res.length);
 
-                if (res != undefined) {
-
-                    $('#mdtail').append(res);
-                    $('#myModal').modal('show');
- 
+                if (res) {
+                    //console.log(res);
+                    if (res.length > 1) {
+                        $('#mdtail').append(res);                        
+                        $('#myModal').modal('show');
+                    }
+                    else {
+                        console.log(res[0].vehicleCus[0].customerid + ' : ' + res[0].vehicleCus[0].license_no);
+                        for (var i = 0; i < res[0].vehicleCus.length; i++) {
+                            var defaultCusId = res[0].vehicleCus[i].customerid;
+                            var defaultLicen = res[0].vehicleCus[i].license_no;
+                            var defaultCusId_send = "'" + res[0].vehicleCus[i].customerid + "'";
+                            var defaultLicen_send = "'" + res[0].vehicleCus[i].license_no + "'";
+                            $('#lisen-list').append('<li> <a href="#" onclick="SelectLisen(' + defaultCusId_send + ',' + defaultLicen_send + ')" >' + defaultLicen + '</a></li>');
+                            //console.log(listItem);
+                        }
+                        SelectLisen(defaultCusId, defaultLicen);
+                        trigger();
+                        //console.log(res);
+                    }
                 } else {
                     console.log("fail");
                 }
@@ -166,9 +166,11 @@
                 cus_id: customer_id,
                 lisen: lisenno
             }
+            console.log(mod)
             $.get('@Url.Action("SelectLisen","Home")', mod, function (res) {
                 $('#myModal').modal('hide');
-                if (res != undefined) {
+                //console.log(res)
+                if (!undefined) {
                     $('#getbyid').html(res);
                     $('#mdtail').html('');
                     trigger();
@@ -179,6 +181,31 @@
             }).done(function (res) {
 
             });
+
+            $.get('@Url.Action("GetLisenList","Home")', mod, function (getd) {
+                $('#myModal').modal('hide');
+                $('#lisen-list').html('');
+                //console.log('getd : ' + getd[0].customerid)
+                for (var i = 0; i < getd.length; i++) {
+                    var defaultCusId = getd[i].customerid;
+                    var defaultLicen = getd[i].license_no;
+                    var defaultCusId_send = "'" + getd[i].customerid + "'";
+                    var defaultLicen_send = "'" + getd[i].license_no + "'";                    
+                    $('#lisen-list').append('<li> <a href="#" onclick="SelectLisen(' + defaultCusId_send + ',' + defaultLicen_send + ')" >' + defaultLicen + '</a></li>');
+                    //console.log(listItem);
+                }
+                if (!undefined) {
+                    //$('#getbyid').html(res);
+                    $('#mdtail').html('');
+                    trigger();
+                    console.log("success");
+                } else {
+                    console.log("fail");
+                }
+            }).done(function (getd) {
+
+            });
         }
+
     </script>
 }

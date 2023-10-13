@@ -4,6 +4,7 @@ using ICTransportDemo.ServiceAction;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol.Plugins;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ICTransportDemo.Controllers
 {
@@ -36,16 +37,16 @@ namespace ICTransportDemo.Controllers
         {
             BusinessLogic service = new BusinessLogic();
             List<CUSTOMER_DETAIL> cus_detail = service.CustomerCompamy(companyname);
+            List<CUSTOMER_DETAIL> datafillter = cus_detail.Where(x => x.vehicleCus != null).ToList();
             try
             {
                 if (cus_detail.Count() > 1)
                 {
-                    return PartialView("_Search", cus_detail);
+                    return PartialView("_Search", datafillter);
                 }
                 else
                 {
-                    ViewData["cus_detail"] = cus_detail;
-                    return View("Index",null);
+                    return Json(cus_detail);
                 }
             }
             catch (Exception ex)
@@ -54,7 +55,7 @@ namespace ICTransportDemo.Controllers
             }
             
         }
-        public IActionResult ChooseFunction(long id , string name)
+/*        public IActionResult ChooseFunction(long id , string name)
         {
             BusinessLogic service = new BusinessLogic();
             List<CUSTOMER_DETAIL> cus_detail =  service.CustomerCompamy(name);
@@ -62,20 +63,22 @@ namespace ICTransportDemo.Controllers
            
             return View("Index");
         }
-
+*/
         public IActionResult SelectLisen(string cus_id , string lisen)
         {
-            VEHICLE_DETAIL vehicle_data = new VEHICLE_DETAIL();
-            JOBHEADER job_data = new JOBHEADER();
-            CUSTOMER_DETAIL customer = new CUSTOMER_DETAIL();
             BusinessLogic service = new BusinessLogic();
             GET_ALL_DETAIL data = service.GetDetail(cus_id, lisen);
-            
+
             return PartialView("_GetBylisen", data);
+            //return Json(data);
         }
-        public IActionResult Privacy()
+        public IActionResult GetLisenList(string cus_id, string lisen)
         {
-            return View();
+            BusinessLogic service = new BusinessLogic();
+            GET_ALL_DETAIL data = service.GetDetail(cus_id, lisen);
+            //List<VEHICLECUS> listlisen = new List<VEHICLECUS>();
+            //listlisen = data.vehicleCus;
+            return Json(data.customer.vehicleCus);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

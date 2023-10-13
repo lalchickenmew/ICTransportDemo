@@ -23,10 +23,10 @@
         @foreach (var item in Model)
         {
 
-            <tr onclick="SelectLisen('@item.customer_id' , '@item.vehicleCus.FirstOrDefault().license_no')">
+            <tr onclick="SelectLisen('@item.customer_id' , '@item.vehicleCus.FirstOrDefault().license_no') ">
 
-                <td >@item.fname</td>
-                <td >@item.address</td>
+                <td>@item.fname</td>
+                <td>@item.address</td>
                 <td>@item.district_name_tha</td>
                 <td>@item.sub_district_name_tha</td>
                 <td>@item.province_name_tha</td>
