@@ -11,41 +11,41 @@
         <div class="row mt-2 mb-2">
 
             <div class="row mb-1">
-                <div class="col-1 d-flex justify-content-end">รหัสบริษัท :</div>
-                <div class="col bg-light rounded">@Model.customer.customer_id </div>
-                <div class="col-1 d-flex justify-content-end">ขื่อบริษัท :</div>
-                <div class="col bg-light rounded">@Model.customer.fname </div>
-                <div class="col-1 d-flex justify-content-end">ประเภท :</div>
-                <div class="col bg-light rounded">@Model.customer.cust_type</div>
-                <div class="col-1 d-flex justify-content-end">ที่อยู่ :</div>
-                <div class="col bg-light rounded">@Model.customer.address </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start">รหัสบริษัท :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.customer_id </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start">ขื่อบริษัท :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.fname </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start">ประเภท :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.cust_type</div>
+                <div class="col-sm col-md d-flex justify-content-sm-start">ที่อยู่ :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.address </div>
             </div>
             <div class="row mb-1">
-                <div class="col-1 d-flex justify-content-end ">ตำบล :</div>
-                <div class="col bg-light rounded">@Model.customer.district_name_tha </div>
-                <div class="col-1 d-flex justify-content-end ">อำเภอ :</div>
-                <div class="col bg-light rounded">@Model.customer.sub_district_name_tha </div>
-                <div class="col-1 d-flex justify-content-end ">จังหวัด :</div>
-                <div class="col bg-light rounded">@Model.customer.province_name_tha</div>
-                <div class="col-1 d-flex justify-content-end ">รหัสไปรษณี :</div>
-                <div class="col bg-light rounded">@Model.customer.zip_Code </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start ">ตำบล :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.district_name_tha </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start ">อำเภอ :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.sub_district_name_tha </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start ">จังหวัด :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.province_name_tha</div>
+                <div class="col-sm col-md d-flex justify-content-sm-start ">รหัสไปรษณี :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.zip_Code </div>
             </div>
             <div class="row mb-1">
-                <div class="col-1 d-flex justify-content-end ">เบอร์ :</div>
-                <div class="col bg-light rounded">@Model.customer.phone_No </div>
-                <div class="col-1 d-flex justify-content-end ">อีเมล :</div>
-                <div class="col bg-light rounded">@Model.customer.email </div>
-                <div class="col-1 d-flex justify-content-end "></div>
-                <div class="col "> </div>
-                <div class="col-1 d-flex justify-content-end "></div>
-                <div class="col "> </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start ">เบอร์ :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.phone_No </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start ">อีเมล :</div>
+                <div class="col-sm col-md bg-light rounded d-flex justify-content-end">@Model.customer.email </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start "></div>
+                <div class="col-sm col-md "> </div>
+                <div class="col-sm col-md d-flex justify-content-sm-start "></div>
+                <div class="col-sm col-md "> </div>
             </div>
         </div>
-
+        z
 
     </div>
 </div>
-<div class="row ">
+<div class="row" rounded-2 >
     <div class="tab-content" id="v-pills-tabContent">
         <div>
             <nav>
@@ -55,53 +55,53 @@
                     <button class="nav-link" id="nav-mailhis-tab" data-bs-toggle="tab" data-bs-target="#nav-mailhis" type="button" role="tab" aria-controls="nav-mailhis" aria-selected="false">ประวัติการส่งอีเมล</button>
                 </div>
             </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-desc" role="tabpanel" aria-labelledby="nav-desc-tab">
-                    <div class="container shadow rounded-2 mb-4 mt-2 display-6 d-flex justify-content-center ">รายละเอียดรถ</div>
+            <div class="tab-content rounded-2" id="nav-tabContent">
+                <div class="tab-pane fade show active rounded shadow" style="backdrop-filter:blur()" id="nav-desc" role="tabpanel" aria-labelledby="nav-desc-tab">
+                    <div class="container mb-4 mt-2 display-6 d-flex justify-content-center ">รายละเอียดรถ</div>
                     <div class="container-fluid  rounded-2 h-100">
                         @if (Model.vehicles != null)
                         {
                             foreach (var item in Model.vehicles)
                             {
                                 <div class="row mb-2">
-                                    <div class="col d-flex justify-content-end">เลขทะเบียน :</div>
-                                    <div class="col bg-light rounded">@item.license_No</div>
-                                    <div class="col d-flex justify-content-end">ซีเควน :</div>
-                                    <div class="col bg-light rounded">@item.seq</div>
-                                    <div class="col d-flex justify-content-end">เลขที่ยี่ห้อ :</div>
-                                    <div class="col bg-light rounded">@item.brand_No</div>
-                                    <div class="col d-flex justify-content-end">เลขที่โมเดล :</div>
-                                    <div class="col bg-light rounded">@item.model_No</div>
+                                    <div class="col d-flex justify-content-sm-start">เลขทะเบียน :</div>
+                                    <div class="col-sm bg-light rounded "><label class="d-flex justify-content-end">@item.license_No</label></div>
+                                    <div class="col-sm d-flex justify-content-sm-start">ซีเควน :</div>
+                                    <div class="col-sm bg-light rounded">@item.seq</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">เลขที่ยี่ห้อ :</div>
+                                    <div class="col-sm bg-light rounded">@item.brand_No</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">เลขที่โมเดล :</div>
+                                    <div class="col-sm bg-light rounded">@item.model_No</div>
                                 </div>
                                 <div class="row mb-2">
-                                    <div class="col d-flex justify-content-end">เลขแชสซี :</div>
-                                    <div class="col bg-light rounded">@item.chassis_No</div>
-                                    <div class="col d-flex justify-content-end">สี :</div>
-                                    <div class="col bg-light rounded">@item.color</div>
-                                    <div class="col d-flex justify-content-end">วันที่มีผล :</div>
-                                    <div class="col bg-light rounded">@item.effective_Date</div>
-                                    <div class="col d-flex justify-content-end">วันที่สิ้นสุด :</div>
-                                    <div class="col bg-light rounded">@item.expire_Date</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">เลขแชสซี :</div>
+                                    <div class="col-sm bg-light rounded">@item.chassis_No</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">สี :</div>
+                                    <div class="col-sm bg-light rounded">@item.color</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">วันที่มีผล :</div>
+                                    <div class="col-sm bg-light rounded">@item.effective_Date</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">วันที่สิ้นสุด :</div>
+                                    <div class="col-sm bg-light rounded">@item.expire_Date</div>
                                 </div>
                                 <div class="row mb-2">
-                                    <div class="col d-flex justify-content-end">ราคาค่าบริการ :</div>
-                                    <div class="col bg-light rounded">@item.service_Price</div>
-                                    <div class="col d-flex justify-content-end">เลขที่บริการ :</div>
-                                    <div class="col bg-light rounded">@item.service_No</div>
-                                    <div class="col d-flex justify-content-end">เลขที่สัญญา :</div>
-                                    <div class="col bg-light rounded">@item.contract_No</div>
-                                    <div class="col d-flex justify-content-end">เลขที่ลูกค้า :</div>
-                                    <div class="col bg-light rounded">@item.customer_Id</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">ราคาค่าบริการ :</div>
+                                    <div class="col-sm bg-light rounded">@item.service_Price</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">เลขที่บริการ :</div>
+                                    <div class="col-sm bg-light rounded">@item.service_No</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">เลขที่สัญญา :</div>
+                                    <div class="col-sm bg-light rounded">@item.contract_No</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">เลขที่ลูกค้า :</div>
+                                    <div class="col-sm bg-light rounded">@item.customer_Id</div>
                                 </div>
                                 <div class="row mb-2">
-                                    <div class="col d-flex justify-content-end">ประเภทสัญญา :</div>
-                                    <div class="col bg-light rounded">@item.contract_Type</div>
-                                    <div class="col d-flex justify-content-end">std_Pmp :</div>
-                                    <div class="col bg-light rounded">@item.std_Pmp</div>
-                                    <div class="col d-flex justify-content-end">รหัสพนักงาน :</div>
-                                    <div class="col bg-light rounded">@item.employee_Id</div>
-                                    <div class="col d-flex justify-content-end">active_Flag :</div>
-                                    <div class="col bg-light rounded">@item.active_Flag</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">ประเภทสัญญา :</div>
+                                    <div class="col-sm bg-light rounded mb-2">@item.contract_Type</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">std_Pmp :</div>
+                                    <div class="col-sm bg-light rounded mb-2">@item.std_Pmp</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">รหัสพนักงาน :</div>
+                                    <div class="col-sm bg-light rounded mb-2">@item.employee_Id</div>
+                                    <div class="col-sm d-flex justify-content-sm-start">active_Flag :</div>
+                                    <div class="col-sm bg-light rounded mb-2">@item.active_Flag</div>
                                 </div>
                             }
                         }
@@ -115,70 +115,70 @@
 
                 </div>
                 <div class="tab-pane fade" id="nav-descjob" role="tabpanel" aria-labelledby="nav-descjob-tab">
-                    @if(Model.jobHeaders != null)
+                    @if (Model.jobHeaders != null)
                     {
-                        <div class="container shadow rounded-2 mb-4 mt-2 display-6 d-flex justify-content-center ">รายละเอียดงาน</div>
-                        foreach(var item in Model.jobHeaders)
+                        <div class="container mb-4 mt-2 display-6 d-flex justify-content-center ">รายละเอียดงาน</div>
+                        foreach (var item in Model.jobHeaders)
                         {
                             <div class="row mt-2">
-                                <div class="col-1 d-flex justify-content-end">เลขงาน :</div>
-                                <div class="col bg-light rounded">@item.job_Id</div>
-                                <div class="col d-flex justify-content-end">เลขทะเบียน :</div>
-                                <div class="col bg-light rounded">@item.license_No</div>
-                                <div class="col d-flex justify-content-end">เลขที่ลูกค้า :</div>
-                                <div class="col bg-light rounded">@item.customer_Id</div>
-                                <div class="col d-flex justify-content-end">ผลรวม :</div>
-                                <div class="col bg-light rounded">@item.summary</div>
+                                <div class="col-sm d-flex justify-content-end">เลขงาน :</div>
+                                <div class="col-sm bg-light rounded">@item.job_Id</div>
+                                <div class="col-sm d-flex justify-content-end">เลขทะเบียน :</div>
+                                <div class="col-sm bg-light rounded">@item.license_No</div>
+                                <div class="col-sm d-flex justify-content-end">เลขที่ลูกค้า :</div>
+                                <div class="col-sm bg-light rounded">@item.customer_Id</div>
+                                <div class="col-sm d-flex justify-content-end">ผลรวม :</div>
+                                <div class="col-sm bg-light rounded">@item.summary</div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-1 d-flex justify-content-end">action :</div>
-                                <div class="col bg-light rounded">@item.action</div>
-                                <div class="col d-flex justify-content-end">ผล :</div>
-                                <div class="col bg-light rounded">@item.result</div>
-                                <div class="col d-flex justify-content-end">ย้ายไปที่ :</div>
-                                <div class="col bg-light rounded">@item.transfer_To</div>
-                                <div class="col d-flex justify-content-end">วันที่ซ่อม :</div>
-                                <div class="col bg-light rounded">@item.fix_Date</div>
+                                <div class="col-sm d-flex justify-content-end">action :</div>
+                                <div class="col-sm bg-light rounded">@item.action</div>
+                                <div class="col-sm d-flex justify-content-end">ผล :</div>
+                                <div class="col-sm bg-light rounded">@item.result</div>
+                                <div class="col-sm d-flex justify-content-end">ย้ายไปที่ :</div>
+                                <div class="col-sm bg-light rounded">@item.transfer_To</div>
+                                <div class="col-sm d-flex justify-content-end">วันที่ซ่อม :</div>
+                                <div class="col-sm bg-light rounded">@item.fix_Date</div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-1 d-flex justify-content-end">วันที่ปิด :</div>
-                                <div class="col bg-light rounded">@item.close_Date</div>
-                                <div class="col d-flex justify-content-end">อีเมลลูกค้า :</div>
-                                <div class="col bg-light rounded">@item.email_Customer</div>
-                                <div class="col d-flex justify-content-end">เลขที่ใบแจ้งหนี้ :</div>
-                                <div class="col bg-light rounded">@item.invoice_No</div>
-                                <div class="col d-flex justify-content-end">เลขที่เจ้าของ :</div>
-                                <div class="col bg-light rounded">@item.owner_Id</div>
+                                <div class="col-sm d-flex justify-content-end">วันที่ปิด :</div>
+                                <div class="col-sm bg-light rounded">@item.close_Date</div>
+                                <div class="col-sm d-flex justify-content-end">อีเมลลูกค้า :</div>
+                                <div class="col-sm bg-light rounded">@item.email_Customer</div>
+                                <div class="col-sm d-flex justify-content-end">เลขที่ใบแจ้งหนี้ :</div>
+                                <div class="col-sm bg-light rounded">@item.invoice_No</div>
+                                <div class="col-sm d-flex justify-content-end">เลขที่เจ้าของ :</div>
+                                <div class="col-sm bg-light rounded">@item.owner_Id</div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-1 d-flex justify-content-end">จัดทำโดย :</div>
-                                <div class="col bg-light rounded">@item.create_By</div>
-                                <div class="col d-flex justify-content-end">วันที่สร้าง :</div>
-                                <div class="col bg-light rounded">@item.create_Date</div>
-                                <div class="col d-flex justify-content-end">แก้ไขโดย :</div>
-                                <div class="col bg-light rounded">@item.update_By</div>
-                                <div class="col d-flex justify-content-end">วันที่แก้ไข :</div>
-                                <div class="col bg-light rounded">@item.update_Date</div>
+                                <div class="col-sm d-flex justify-content-end">จัดทำโดย :</div>
+                                <div class="col-sm bg-light rounded">@item.create_By</div>
+                                <div class="col-sm d-flex justify-content-end">วันที่สร้าง :</div>
+                                <div class="col-sm bg-light rounded">@item.create_Date</div>
+                                <div class="col-sm d-flex justify-content-end">แก้ไขโดย :</div>
+                                <div class="col-sm bg-light rounded">@item.update_By</div>
+                                <div class="col-sm d-flex justify-content-end">วันที่แก้ไข :</div>
+                                <div class="col-sm bg-light rounded">@item.update_Date</div>
                             </div>
-                             <div class="row mt-2">
-                                <div class="col-1 d-flex justify-content-end">ref_HJob_Id :</div>
-                                <div class="col bg-light rounded">@item.ref_HJob_Id</div>
-                                    <div class="col d-flex justify-content-end">สถานะ :</div>
-                                <div class="col bg-light rounded">@item.status</div>
-                                    <div class="col d-flex justify-content-end">ประเภทงาน :</div>
-                                <div class="col bg-light rounded">@item.type_job</div>
-                                    <div class="col d-flex justify-content-end">สถานะงาน :</div>
-                                <div class="col bg-light rounded">@item.job_Status</div>
-                                </div>
                             <div class="row mt-2">
-                                <div class="col-1 d-flex justify-content-end">วันใบเสร็จ :</div>
-                                <div class="col bg-light rounded">@item.receive_Date</div>
-                                <div class="col d-flex justify-content-end">travel_Date :</div>
-                                <div class="col bg-light rounded">@item.travel_Date</div>
-                                <div class="col d-flex justify-content-end">job_Date :</div>
-                                <div class="col bg-light rounded">@item.job_Date</div>
-                                <div class="col d-flex justify-content-end">qt_Id :</div>
-                                <div class="col bg-light rounded">@item.qt_Id</div>
+                                <div class="col-sm d-flex justify-content-end">ref_HJob_Id :</div>
+                                <div class="col-sm bg-light rounded">@item.ref_HJob_Id</div>
+                                <div class="col-sm d-flex justify-content-end">สถานะ :</div>
+                                <div class="col-sm bg-light rounded">@item.status</div>
+                                <div class="col-sm d-flex justify-content-end">ประเภทงาน :</div>
+                                <div class="col-sm bg-light rounded">@item.type_job</div>
+                                <div class="col-sm d-flex justify-content-end">สถานะงาน :</div>
+                                <div class="col-sm bg-light rounded">@item.job_Status</div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm d-flex justify-content-end">วันใบเสร็จ :</div>
+                                <div class="col-sm bg-light rounded">@item.receive_Date</div>
+                                <div class="col-sm d-flex justify-content-end">travel_Date :</div>
+                                <div class="col-sm bg-light rounded">@item.travel_Date</div>
+                                <div class="col-sm d-flex justify-content-end">job_Date :</div>
+                                <div class="col-sm bg-light rounded">@item.job_Date</div>
+                                <div class="col-sm d-flex justify-content-end">qt_Id :</div>
+                                <div class="col-sm bg-light rounded">@item.qt_Id</div>
                             </div>
                         }
                     }
