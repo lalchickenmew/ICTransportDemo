@@ -18,7 +18,7 @@ namespace ICTransportDemo.Controllers
             _logger = logger;
             _configuration = configuration;
         }
-
+        //รับ token username จาก menu กลาง
         public IActionResult Index()
         {
             if (ViewData["cus_detail"] != null)
@@ -50,15 +50,6 @@ namespace ICTransportDemo.Controllers
             }
 
         }
-        /*        public IActionResult ChooseFunction(long id , string name)
-                {
-                    BusinessLogic service = new BusinessLogic();
-                    List<CUSTOMER_DETAIL> cus_detail =  service.CustomerCompamy(name);
-                    var vehicle = cus_detail.Where(x => x.customer_id == id);
-
-                    return View("Index");
-                }
-        */
         public IActionResult SelectLisen(string cus_id, string lisen)
         {
             BusinessLogic service = new BusinessLogic(_configuration);
