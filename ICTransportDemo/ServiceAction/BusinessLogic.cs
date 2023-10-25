@@ -1,8 +1,10 @@
 ﻿using ICTransportDemo.DataContract;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using NuGet.Common;
 using RestSharp;
 using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -14,12 +16,16 @@ namespace ICTransportDemo.ServiceAction
 {
     public class BusinessLogic
     {
-        public string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdG1wYmVuekBnbWFpbC5jb20iLCJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ0siLCJleHAiOjE2OTcyNjUxODEsImlzcyI6IklTRUUiLCJhdWQiOiJodHRwOi8vSVNFRS5jb20ifQ.THld-vjb9co2Bjl5ji_yn1vZOwewwwN-8QZIqQflPkA";
+        public string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdG1wYmVuekBnbWFpbC5jb20iLCJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ0siLCJleHAiOjE2OTgzNDI4NzMsImlzcyI6IklTRUUiLCJhdWQiOiJodHRwOi8vSVNFRS5jb20ifQ.B3UwEyBNIpAI-_PpUccrCJ4R7x4sAnyYbBOPNdE6dF0";
         private object client;
-
+        private readonly IConfiguration _configuration;
+        public BusinessLogic(IConfiguration configuration) {
+            _configuration = configuration.GetSection("AppSettings");
+        }
         public List<CUSTOMER_DETAIL> CustomerCompamy(string fname)
         {
-            RestClient client = new RestClient("http://203.151.136.81/iseecenterapi");
+            string RestAPI = _configuration.GetSection("ConnectionString").Value;
+            RestClient client = new RestClient(RestAPI);
             RestRequest request = new RestRequest($"api/v1/Menus/CounterCall/{fname}", Method.Get);
 
             request.AddHeader("Authorization", "Bearer " + token);
@@ -42,7 +48,8 @@ namespace ICTransportDemo.ServiceAction
 
         public  GET_ALL_DETAIL GetDetail(string cus_id , string licen_no)
         {
-            RestClient client = new RestClient("http://203.151.136.81/iseecenterapi");
+            string RestAPI = _configuration.GetSection("ConnectionString").Value;
+            RestClient client = new RestClient(RestAPI);
             RestRequest request = new RestRequest($"api/v1/Menus/GetCounterDetail/{cus_id}/{licen_no}", Method.Get);
             request.AddHeader("Authorization", "Bearer " +token);
             var response = client.Execute(request);

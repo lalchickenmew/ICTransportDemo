@@ -53,8 +53,8 @@
                 </div>
 
         </div>
-        <div class="col-sm-10" style="background-color : white">
-            <div class="row align-content-center rounded-1" style="height:50px; background-color:#B8DEFD">
+        <div class="col-sm-10 rounded-2" style="background-color : white">
+            <div class="row align-content-center rounded-1" style="height:50px; background-color:#7BBDE8">
                 @* <div class="col bg-danger d-none d-lg-block d-xl-none">
                     <div class="accordion accordion-flush mt-1 " id="accordionFlushExample">
                         <div class="accordion-item rounded-2 shadow">
@@ -184,6 +184,8 @@
     <script>
         $(document).ready(function () {
             // $('#myModal').modal('show');
+            $('#getbyid').html('<label class="d-flex justify-content-center">ไม่พบข้อมูลเพื่อนแสดง</label>');
+
         });
 
         function trigger() {
@@ -210,7 +212,7 @@
                         $('#myModal').modal('show');
                     }
                     else {
-                        console.log(res[0].vehicleCus[0].customerid + ' : ' + res[0].vehicleCus[0].license_no);
+                        //console.log(res[0].vehicleCus[0].customerid + ' : ' + res[0].vehicleCus[0].license_no);
                         for (var i = 0; i < res[0].vehicleCus.length; i++) {
                             var defaultCusId = res[0].vehicleCus[i].customerid;
                             var defaultLicen = res[0].vehicleCus[i].license_no;
@@ -224,7 +226,7 @@
                         //console.log(res);
                     }
                 } else {
-                    console.log("fail");
+                    //console.log("fail");
                 }
             }).done(function (res) {
 
@@ -237,17 +239,18 @@
                 cus_id: customer_id,
                 lisen: lisenno
             }
-            console.log(mod)
+            //console.log(mod)
             $.get('@Url.Action("SelectLisen","Home")', mod, function (res) {
                 $('#myModal').modal('hide');
+                $('#getbyid').html('');
                 //console.log(res)
                 if (!undefined) {
                     $('#getbyid').html(res);
                     $('#mdtail').html('');
                     trigger();
-                    console.log("success");
+                    //console.log("success");
                 } else {
-                    console.log("fail");
+                    //console.log("fail");
                 }
             }).done(function (res) {
 
@@ -269,9 +272,9 @@
                     //$('#getbyid').html(res);
                     $('#mdtail').html('');
                     trigger();
-                    console.log("success");
+                    //console.log("success");
                 } else {
-                    console.log("fail");
+                    //console.log("fail");
                 }
             }).done(function (getd) {
 

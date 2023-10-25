@@ -1,0 +1,93 @@
+﻿@using ICTransportDemo.DataContract;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<JOBHEADER>;
+<div class="container-fluid  rounded-2 h-100">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">job_Id :</div>
+                <div class="col-xl bg-light rounded "><label class="d-flex justify-content-end">@item.job_Id</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">license_No :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.license_No</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">customer_Id :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.customer_Id</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">summary :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.summary</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">result :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.result</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">transfer_To :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.transfer_To</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">fix_Date :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.fix_Date</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">close_Date :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.close_Date</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">E-mail :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.email_Customer</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">owner_Id :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.owner_Id</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">create_By :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.create_By</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">create_Date :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.create_Date</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">update_By :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.update_By</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">update_Date :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.update_Date</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">ref_HJob_Id :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.ref_HJob_Id</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">status :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.status</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">type_job :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.type_job</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">job_Status :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.job_Status</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">receive_Date :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.receive_Date</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">travel_Date :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.travel_Date</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">job_Date :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.job_Date</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">qt_Id :</div>
+                <div class="col-xl bg-light rounded mb-2"><label class="d-flex justify-content-end">@item.qt_Id</label></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-xl d-flex justify-content-sm-start">invoice_No :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.invoice_No</label></div>
+                <div class="col-xl d-flex justify-content-sm-start">invoice_No :</div>
+                <div class="col-xl bg-light rounded"><label class="d-flex justify-content-end">@item.invoice_No</label></div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">
+            <div class="col"><label class="text-danger">ไม่พบข้อมูล</label></div>
+        </div>
+    }
+</div>
