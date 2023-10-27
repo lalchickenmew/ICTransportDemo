@@ -16,11 +16,13 @@ namespace ICTransportDemo.ServiceAction
 {
     public class BusinessLogic
     {
-        public string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdG1wYmVuekBnbWFpbC5jb20iLCJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ0siLCJleHAiOjE2OTgzNDI4NzMsImlzcyI6IklTRUUiLCJhdWQiOiJodHRwOi8vSVNFRS5jb20ifQ.B3UwEyBNIpAI-_PpUccrCJ4R7x4sAnyYbBOPNdE6dF0";
+        public string token = "";//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdG1wYmVuekBnbWFpbC5jb20iLCJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ0siLCJleHAiOjE2OTgzNDI4NzMsImlzcyI6IklTRUUiLCJhdWQiOiJodHRwOi8vSVNFRS5jb20ifQ.B3UwEyBNIpAI-_PpUccrCJ4R7x4sAnyYbBOPNdE6dF0";
+    
         private object client;
         private readonly IConfiguration _configuration;
-        public BusinessLogic(IConfiguration configuration) {
+        public BusinessLogic(IConfiguration configuration , string _token) {
             _configuration = configuration.GetSection("AppSettings");
+            token = _token;
         }
         public List<CUSTOMER_DETAIL> CustomerCompamy(string fname)
         {

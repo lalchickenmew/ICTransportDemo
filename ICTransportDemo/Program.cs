@@ -8,6 +8,12 @@ namespace ICTransportDemo
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(1); // Set session timeout
+            });
 
             var app = builder.Build();
 
@@ -19,12 +25,13 @@ namespace ICTransportDemo
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",
